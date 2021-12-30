@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITLE</title>
+    <!-- <link rel="stylesheet" href="assets/styles/style.css"> -->
+    <style>
+        .card {
+            width: 300px;
+            padding-bottom: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            border: black 2px solid;
+            position: relative;
+        }
+        .upper {
+            display: flex;
+            justify-content: space-between;
+        }
+        .name{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            /* transform: rotate(270deg); */
+            font-size: 40px;
+        }
+        .stage {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            /* transform: rotate(270deg); */
+            font-size: 40px;
+
+        }
+        .name , .stage , .upper {
+            background-color: rgba(48, 48, 48, 0.75);
+        }
+        form{
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form action="" onsubmit="return false">
+            <input type="text" placeholder="First Name" name="" id="first">
+            <input type="text" placeholder="Last Name" name="" id="last">
+            <input type="text" placeholder="Stage Name" name="" id="stage">
+            <input type="number" placeholder="How many albums" name="" id="albums">
+            <input type="number" placeholder="How many top 10 Singles?" name="" id="singles">
+            <input type="number" placeholder="Net worth in EUR" name="" id="net">
+            <input type="number" placeholder="How old is this person" name="" id="old">
+            <textarea name="" placeholder="A famous quote by this person" id="quot" cols="30" rows="10"></textarea>
+            <input type="url" placeholder="Image URL" id="url">
+            <button onclick="makeCard()">.......Add.......</button>
+        </form>
+    </main>
+<!-- SCRIPT -->
+    <script>
+        class Singer{
+            constructor(first='rouz',last='rouz',stage='rouz',albums=10,singles=10,net=10,old=10,quot='rouz',url='https://i.scdn.co/image/8a923975196c76afe391cf75aacf6ca587a6b576'){
+                this.first = first
+                this.last = last
+                this.stage = stage
+                this.albums = albums
+                this.singles = singles
+                this.net = net
+                this.old = old
+                this.quot = quot
+                this.url = url
+            }
+            singeCard(){
+                let card = document.createElement('div')
+                card.setAttribute('class', 'card')
+                card.setAttribute('style', `background-image: url(${this.url})`)
+                    let info = document.createElement('div')
+                    info.setAttribute('class', 'upper')
+                        let albums = document.createElement('p')
+                        albums.innerText = `Albums: ${this.albums}`
+                        let singles = document.createElement('p')
+                        singles.innerText = `Hits: ${this.singles}`
+                        let net = document.createElement('p')
+                        net.innerText = `netWorth: ${this.net}`
+                        let age = document.createElement('p')
+                        age.innerText = `Age: ${this.old}`
+                        info.append(albums,singles,net,age)
+                        let fullname = document.createElement('div')
+                        fullname.setAttribute('class', 'name')
+                        fullname.innerText = `${this.first} ${this.last}`
+                        let stage = document.createElement('div')
+                        stage.setAttribute('class', 'stage')
+                        stage.innerText = `${this.stage}`
+                        card.append(fullname,stage)
+                    card.appendChild(info)
+                    document.querySelector('main').appendChild(card)
+                    }
+        }
+        makeCard= ()=>{
+            let first = document.getElementById('first').value
+            let last = document.getElementById('last').value
+            let stage = document.getElementById('stage').value
+            let albums = document.getElementById('albums').value
+            let singles = document.getElementById('singles').value
+            let net = document.getElementById('net').value
+            let old = document.getElementById('old').value
+            let quot = document.getElementById('quot').value
+            let url = document.getElementById('url').value
+
+            // let newCard = new Singer(first,last,stage,albums,singles,net,old,quot,url)
+            let newCard = new Singer()
+            newCard.singeCard()
+        }
+    </script>
+</body>
+</html>
